@@ -101,4 +101,3 @@ class Grid(ABC):
 #     print(f"agent_2 similarity is: {similarity}")
 #     grid.move(agent_2)
 #     print(f"Agent2 新位置: ({agent_2.x}, {agent_2.y})")
-
