@@ -1,5 +1,4 @@
 import random
-from base_env.base_grid import Grid
 
 random.seed(2025) # fix random seed
 
@@ -24,7 +23,7 @@ class Agent(object):
                     neighborhood.append(grid.grid[nx][ny])
         return neighborhood
 
-    def act(self, grid: Grid, perception, threshold):
+    def act(self, grid, perception, threshold):
         # Schelling model decision to move or stay
         similar = sum(1 for agent in perception if agent and agent.agent_type == self.agent_type)
         total = sum(1 for agent in perception if agent)

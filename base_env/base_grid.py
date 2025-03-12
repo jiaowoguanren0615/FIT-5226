@@ -1,8 +1,9 @@
 import functools
 import random
 from base_env.base_agent import Agent
-from abc import abstractmethod, ABC
+from abc import ABC
 
+random.seed(2025) # fix random seed
 
 class Grid(ABC):
     ## Base Module
@@ -68,7 +69,7 @@ class Grid(ABC):
         similarity = same_type_count / total_agents if total_agents != 0 else 0
         return similarity
 
-    @abstractmethod
+
     def step(self, threshold=.5):
         # main method for re-writing
         pass
