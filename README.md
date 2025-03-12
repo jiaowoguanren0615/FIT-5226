@@ -1,7 +1,6 @@
 <h1 align='center'>FIT-5226</h1>
 
-## This project is implemented in Python, Scripts for fit-5226: Multi agent systems and collective behaviour.  
-
+## Lab scripts for fit-5226: Multi agent systems and collective behaviour.  
 
 ## Preparation
 
