@@ -1,0 +1,12 @@
+name: fit5226
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - matplotlib==3.5.1
+      - numpy==2.2.3
+      - ipympl==0.9.7
+      - pillow==11.1.0
+      - plotly==6.0.0
+      - ipykernel==6.29.5
+      - scipy==1.15.2
