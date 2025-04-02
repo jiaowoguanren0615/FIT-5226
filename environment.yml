@@ -10,3 +10,4 @@ dependencies:
       - plotly==6.0.0
       - ipykernel==6.29.5
       - scipy==1.15.2
+      - pymdptoolbox==4.0b3
