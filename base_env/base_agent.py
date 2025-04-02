@@ -4,7 +4,7 @@ random.seed(2025) # fix random seed
 
 
 class Agent(object):
-    def __init__(self, agent_type):
+    def __init__(self, agent_type=None):
         self.x = None
         self.y = None
         self.agent_type = agent_type

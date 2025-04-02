@@ -8,7 +8,7 @@ class GridEnv(Grid):
         self.similarity = []
 
 
-    def step(self, threshold=.5):
+    def step(self):
         pass
 
 # if __name__ == '__main__':

@@ -70,7 +70,7 @@ class Grid(ABC):
         return similarity
 
 
-    def step(self, threshold=.5):
+    def step(self, **kwargs):
         # main method for re-writing
         pass
 
