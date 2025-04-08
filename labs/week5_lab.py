@@ -47,6 +47,9 @@ class GridWorld(Grid):
 
         self.state = None # (x, y, has_load)
 
+        self.reset()
+
+
 
     @log_function
     def reset(self):
@@ -108,7 +111,7 @@ def main(args):
 
     env = GridWorld(rows=args.rows, cols=args.cols,
                     A_position=args.A_position, B_position=args.B_position)
-    state = env.reset()
+    # env.reset()
 
     metric_logger = MetricLogger(delimiter=" | ")
     avg_reward_meter = AverageMeter()
