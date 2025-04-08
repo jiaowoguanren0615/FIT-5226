@@ -1,4 +1,5 @@
 import random
+from base_env.logger_record import log_function
 
 random.seed(2025) # fix random seed
 
@@ -9,10 +10,11 @@ class Agent(object):
         self.y = None
         self.agent_type = agent_type
 
-
+    @log_function
     def set_position(self, x, y):
         self.x, self.y = x, y
 
+    @log_function
     def sense(self, grid):
         # Example: sense neighboring cells
         neighborhood = []
@@ -23,6 +25,7 @@ class Agent(object):
                     neighborhood.append(grid.grid[nx][ny])
         return neighborhood
 
+    @log_function
     def act(self, grid, perception, threshold):
         # Schelling model decision to move or stay
         similar = sum(1 for agent in perception if agent and agent.agent_type == self.agent_type)
@@ -32,3 +35,7 @@ class Agent(object):
             empty_cells = grid.empty_positions
             if empty_cells:
                 grid.move(self)
+
+
+    def __repr__(self):
+        return f"<Agent type={self.agent_type} pos=({self.x},{self.y})>"

@@ -1,5 +1,8 @@
 from base_env.base_grid import Grid
 from base_env.base_agent import Agent
+from base_env.logger_record import log_function
+
+import logging
 
 from typing import Tuple, Any
 import random
@@ -45,6 +48,7 @@ class GridWorld(Grid):
         self.state = None # (x, y, has_load)
 
 
+    @log_function
     def reset(self):
         """随机初始化智能体位置 & 货物未被拾取"""
         x = random.randint(0, self.rows - 1)
@@ -54,6 +58,7 @@ class GridWorld(Grid):
         return self.state
 
 
+    @log_function
     def step(self, action) -> Tuple[Any, float, bool]:
         """
         根据 action 更新状态并返回:
@@ -99,6 +104,8 @@ class GridWorld(Grid):
 
 
 def main(args):
+    logger = logging.getLogger(__name__)
+
     env = GridWorld(rows=args.rows, cols=args.cols,
                     A_position=args.A_position, B_position=args.B_position)
     state = env.reset()
@@ -116,8 +123,18 @@ def main(args):
 
         print(f"Step {epoch + 1:2d}: Action = {action}, Reward = {reward:.4f}, "
               f"Average Reward = {avg_reward_meter.avg:.4f}, State = {next_state}")
+
+        logger.info(
+            f"Step {epoch + 1:2d}: "
+            f"Action = {action}, "
+            f"Reward = {reward:.4f}, "
+            f"Average Reward = {avg_reward_meter.avg:.4f}, "
+            f"State = {next_state}"
+        )
+
         if done:
             print("Task completed!")
+            logger.info("Task completed!")
             break
 
 

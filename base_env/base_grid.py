@@ -1,6 +1,7 @@
 import functools
 import random
 from base_env.base_agent import Agent
+from base_env.logger_record import log_function
 from abc import ABC
 
 random.seed(2025) # fix random seed
@@ -16,7 +17,7 @@ class Grid(ABC):
         self.agents = []
         self.occupied_positions = []
 
-
+    @log_function
     def initialize(self, agent: Agent, x: int, y: int):
         if self.grid[x][y] is None:
             self.grid[x][y] = agent
@@ -25,7 +26,7 @@ class Grid(ABC):
             self.empty_positions.remove((x, y))
             self.occupied_positions.append((x, y))
 
-
+    @log_function
     def populate(self, agent_class, count, **kwargs):
         free_positions = [(x, y) for x in range(self.rows) for y in range(self.cols) if self.grid[x][y] is None]
         for _ in range(min(count, len(free_positions))):
@@ -35,6 +36,7 @@ class Grid(ABC):
             self.initialize(agent, x, y)
 
 
+    @log_function
     def get_all_neighbors(self, x, y):
         neighbors = []
         for dx in [-1, 0, 1]:
@@ -45,6 +47,7 @@ class Grid(ABC):
                 neighbors.append(self.grid[nx][ny]) # include None Type
         return neighbors
 
+    @log_function
     def update_position(self, agent, new_x, new_y):
         self.grid[agent.x][agent.y] = None
         self.empty_positions.append((agent.x, agent.y))
@@ -56,12 +59,14 @@ class Grid(ABC):
 
         agent.set_position(new_x, new_y)
 
+    @log_function
     def move(self, agent):
         if self.empty_positions:
             target_x, target_y = random.choice(self.empty_positions)
             self.update_position(agent, target_x, target_y)
             return
 
+    @log_function
     def count_similarity(self, x, y, agent_type):
         neighbors = self.get_all_neighbors(x, y)
         same_type_count = sum(1 for agent in neighbors if agent is not None and agent.agent_type == agent_type)
@@ -69,15 +74,22 @@ class Grid(ABC):
         similarity = same_type_count / total_agents if total_agents != 0 else 0
         return similarity
 
-
+    @log_function
     def step(self, **kwargs):
         # main method for re-writing
         pass
 
+
+    @log_function
     @staticmethod
     @functools.lru_cache(maxsize=512)
     def is_valid_position(x, y, rows, cols):
         return 0 <= x < rows and 0 <= y < cols
+
+
+    def __repr__(self):
+        return f"<{self.__class__.__name__} rows={self.rows} cols={self.cols} " \
+               f"agents={len(self.agents)}>"
 
 
 # if __name__ == '__main__':
